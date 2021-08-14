@@ -17,8 +17,6 @@ import java.util.Objects;
 @Service
 public class UtilsService
 {
-    private final Logger logger = LoggerFactory.getLogger(UtilsService.class);
-
     public String getVersion() throws XmlPullParserException, IOException
     {
         MavenXpp3Reader reader = new MavenXpp3Reader();
@@ -29,11 +27,10 @@ public class UtilsService
             model = reader.read(
                     new InputStreamReader(
                             Objects.requireNonNull(ObjectMetaData.Application.class.getResourceAsStream(
-                                    "/META-INF/maven/polsl/pbl-server-app/pom.xml"
+                                    "/META-INF/maven/dkantoch/jrecruiter/pom.xml"
                             ))
                     )
             );
-        logger.info("Software version {}",model.getVersion());
         return model.getVersion();
     }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {TokenStorageService} from "./services/token-storage.service";
-import {UtilsService} from "./services/utils.service";
 import {Observable} from "rxjs";
+import {UtilsService} from "./services/utils.service";
 
 @Component({
   selector: 'app-root',
@@ -14,12 +14,15 @@ export class AppComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
-  version?:Observable<string>;
+  version?:string;
 
-  constructor(private tokenStorageService: TokenStorageService,private utilService:UtilsService) { }
+  constructor(private tokenStorageService: TokenStorageService,private utilsService:UtilsService) { }
 
   ngOnInit(): void {
-    this.version = this.utilService.getSoftwareVersion();
+    this.utilsService.getSoftwareVersion().subscribe(data => {
+      this.version = data.version;
+    });
+    console.log(this.version);
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
