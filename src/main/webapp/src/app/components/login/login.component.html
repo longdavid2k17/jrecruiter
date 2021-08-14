@@ -1,0 +1,72 @@
+<div class="col-md-12">
+  <div id="logreg-forms">
+    <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()"#f="ngForm" novalidate>
+      <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Zaloguj się</h1>
+      <div class="social-login">
+        <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> poprzez Facebook</span></button>
+        <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> poprzez Google+</span></button>
+      </div>
+      <p style="text-align:center"> lub klasycznie  </p>
+      <hr/>
+      <div class="form-group">
+        <label for="username">Nazwa użytkownika</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          name="username"
+          placeholder="Login"
+          [(ngModel)]="form.username"
+          required
+          #username="ngModel"/>
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="username.errors && f.submitted">
+          Nazwa użytkownika jest wymagana!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Hasło</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Hasło"
+          [(ngModel)]="form.password"
+          required
+          minlength="6"
+          #password="ngModel"/>
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="password.errors && f.submitted">
+          <div *ngIf="password.errors.required">Hasło jest wymagane</div>
+          <div *ngIf="password.errors.minlength">
+            Hasło musi mieć przynajmniej 6 znaków
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">
+          Zaloguj się
+        </button>
+        <a href="#" id="forgot_pswd">Zapomniałeś hasła?</a>
+        <hr>
+        <a routerLink="/register"><button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Stwórz nowe konto</button></a>
+      </div>
+      <div class="form-group">
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && isLoginFailed">
+          Logowanie się nie powiodło: {{ errorMessage }}
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="alert alert-success" *ngIf="isLoggedIn">
+    Zalogowano jako {{ roles }}.
+  </div>
+</div>

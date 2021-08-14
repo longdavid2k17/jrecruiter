@@ -68,14 +68,14 @@ public class AuthorizationService
         {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Błąd: Użytkownik z takim loginem istnieje!"));
+                    .body(new MessageResponse("Błąd: użytkownik z takim loginem istnieje!"));
         }
 
         if (userRepository.existsByEmail(signupRequest.getEmail()))
         {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Błąd: Użytkownik z takim adresem email istnieje!"));
+                    .body(new MessageResponse("Błąd: użytkownik z takim adresem email istnieje!"));
         }
 
         User user = new User(signupRequest.getUsername(), signupRequest.getEmail(), encoder.encode(signupRequest.getPassword()), signupRequest.getName(), signupRequest.getSurname(), signupRequest.getPhoneNumber());
@@ -85,7 +85,7 @@ public class AuthorizationService
 
         if (strRoles == null)
         {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            Role userRole = roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Błąd: nie znaleziono takiej roli!"));
             roles.add(userRole);
         }
         else
