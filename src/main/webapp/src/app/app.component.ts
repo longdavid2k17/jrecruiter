@@ -4,6 +4,8 @@ import {Observable} from "rxjs";
 import {UtilsService} from "./services/utils.service";
 import {NewsletterService} from "./services/newsletter.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AlertsService} from "angular-alert-module";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-root',
@@ -26,7 +28,7 @@ export class AppComponent {
   errorMessage = '';
   successMessage = '';
 
-  constructor(private tokenStorageService: TokenStorageService,private utilsService:UtilsService, private newsletterService:NewsletterService) { }
+  constructor(private tokenStorageService: TokenStorageService,private utilsService:UtilsService, private newsletterService:NewsletterService,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.utilsService.getSoftwareVersion().subscribe(data => {
@@ -50,17 +52,17 @@ export class AppComponent {
   {
     if(this.mailForm.value==="" || !this.mailForm.value)
     {
-     console.log("Błąd!")
+     this.toastr.error('Błędny adres email!','Błąd');
     }
     else
     {
       this.newsletterService.saveMailingAddress(this.mailForm.value.emailAddress).subscribe(
         response => {
-          console.log(response);
+          this.toastr.success(response,'Sukces');
         },
         error => {
           this.errorMessage = error.error.message;
-          console.error(error.error.message)
+          this.toastr.error(error.error.message,'Błąd')
         }
       );
     }
