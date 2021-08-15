@@ -14,6 +14,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import java.io.IOException;
 
 public class AuthTokenFilter extends OncePerRequestFilter
@@ -26,6 +27,7 @@ public class AuthTokenFilter extends OncePerRequestFilter
 
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
+    @Transactional
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException
     {

@@ -55,11 +55,12 @@ export class AppComponent {
     else
     {
       this.newsletterService.saveMailingAddress(this.mailForm.value.emailAddress).subscribe(
-        data => {
-          this.successMessage = data;
+        response => {
+          console.log(response);
         },
         error => {
           this.errorMessage = error.error.message;
+          console.error(error.error.message)
         }
       );
     }

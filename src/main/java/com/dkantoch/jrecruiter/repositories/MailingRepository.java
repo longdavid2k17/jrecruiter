@@ -12,4 +12,5 @@ public interface MailingRepository extends JpaRepository<MailingEntity,Long>
 {
     List<MailingEntity> findAllByIsActive(Boolean isActive);
     Optional<MailingEntity> findByEmailAndIsActive(String email, Boolean isActive);
+    Optional<MailingEntity> findByEmail(String email);
 }
