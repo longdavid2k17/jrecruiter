@@ -1,0 +1,69 @@
+<div class="container">
+  <header class="jumbotron">
+    <h3>
+      Witaj na innowacyjnym portalu pracy - <strong>JRecruiter</strong><br/>
+      Naszym zadaniem jest uprościć do minimum proces rekrutacji aby w łatwy i przyjemny sposób można było znaleźć wymarzoną pracę w branży IT.
+    </h3>
+  </header>
+  <div class="d-md-inline-flex row justify-content-center">
+    <div class="col-md-5 col-lg-4 col-xl-3 col-sm-6 d-flex align-items-stretch" *ngFor="let tempOffer of jobOffers" style="margin: 10px">
+      <div class=" card shadow-lg border-0 py-2">
+        <div class="card-header border-0 mb-0">
+          <div class="row justify-content-between">
+            <div class="col-auto col-sm-auto">
+              <h4>
+                <div *ngIf="tempOffer.contractType =='Umowa o pracę'">
+                  <span class="badge badge-pill badge-success">{{tempOffer.contractType}}</span>
+                </div>
+                <div *ngIf="tempOffer.contractType =='Umowa zlecenie'">
+                  <span class="badge badge-pill badge-primary">{{tempOffer.contractType}}</span>
+                </div>
+                <div *ngIf="tempOffer.contractType =='Staż'">
+                  <span class="badge badge-pill badge-warning">{{tempOffer.contractType}}</span>
+                </div>
+                <div *ngIf="tempOffer.contractType =='Umowa o dzieło'">
+                  <span class="badge badge-pill badge-danger">{{tempOffer.contractType}}</span>
+                </div>
+              </h4>
+            </div>
+            <div class="col-auto col-sm-auto">
+              <div class="row mx-auto pt-2">
+                <h6>do {{ tempOffer.highEndPaymentRange }} PLN</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class=" card-body text-center pb-0 mt-0 pt-3">
+          <div class="d-block">
+            <h5 class="card-title mb-0 font-weight-bold">{{tempOffer.positionTitle}}</h5> <small class="text-info my-1"> <i class="fa fa-file-code-o small"></i>{{tempOffer.company.companyName}}</small>
+          </div>
+          <div class="d-inline-flex row mb-3 ">
+            <div class="col-md-auto">
+              <ul class="list-inline my-0">
+                <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">UI</span></li>
+                <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">UX</span></li>
+                <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">photoshop</span></li>
+                <li class="list-inline-item "> <button class="badge badge-pill badge-primary" type="button">+4</button></li>
+              </ul>
+            </div>
+          </div>
+          <div class="d-flex row mb-0">
+            <div class="col ">
+              <p class="text-muted"> {{ tempOffer.positionDescription }} </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <hr class="hl">
+        </div>
+        <div class="card-footer border-0 text-center mx-auto ">
+          <h5 class="footer"> <a routerLink="/oferta/{{tempOffer.id}}" class="text-decoration-none"> Podgląd oferty</a></h5>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="jobOffers?.length == 0" class="" role="alert">
+      Nie znaleziono ofert.
+    </div>
+  </div>
+</div>
