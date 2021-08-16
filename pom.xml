@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.dkantoch</groupId>
     <artifactId>jrecruiter</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.3</version>
     <name>jrecruiter</name>
     <description>JRecruiter application</description>
     <properties>

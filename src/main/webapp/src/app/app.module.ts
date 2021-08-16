@@ -9,23 +9,35 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RegisterComponent } from './components/register/register.component';
 import {HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HomeComponent } from './components/home/home.component';
+import {AlertsModule} from "angular-alert-module";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {timeout} from "rxjs/operators";
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchJobComponent,
     LoginComponent,
-    RegisterComponent,
-    HomeComponent
+    RegisterComponent
   ],
     imports: [
       BrowserModule,
       AppRoutingModule,
       FormsModule,
       HttpClientModule,
+      AlertsModule,
       ReactiveFormsModule,
-      NgbModule
+      NgbModule,
+      BrowserAnimationsModule,
+      ToastrModule.forRoot({
+        timeOut:3000,
+        progressBar:true,
+        progressAnimation:'increasing',
+        preventDuplicates: true,
+        positionClass: 'toast-top-right'
+        }
+      )
     ],
   providers: [],
   bootstrap: [AppComponent]
