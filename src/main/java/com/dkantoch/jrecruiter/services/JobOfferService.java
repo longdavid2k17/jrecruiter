@@ -10,7 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class JobOfferService
@@ -51,5 +54,27 @@ public class JobOfferService
         }
         else
             return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Brak pozycji!"));
+    }
+
+    public ResponseEntity<?> getHomeOffers()
+    {
+        List<JobOffer> offersList = (List<JobOffer>) getAllOffers().getBody();
+        List<JobOffer> sorted = offersList.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        List<JobOffer> homeList = new ArrayList<>();
+        if(sorted.size()>0)
+        {
+            int counter = 1;
+            for(JobOffer jobOffer : sorted)
+            {
+                homeList.add(jobOffer);
+                if(counter<20)
+                    counter++;
+                else
+                    break;
+            }
+        }
+        else
+            return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Błąd podczas pobierania!"));
+        return ResponseEntity.ok().body(homeList);
     }
 }

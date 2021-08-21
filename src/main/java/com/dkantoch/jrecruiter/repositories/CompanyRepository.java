@@ -9,6 +9,4 @@ import org.springframework.stereotype.Repository;
 public interface CompanyRepository extends JpaRepository<Company,Long>
 {
     Company getCompanyById(Long id);
-
-    Company findByJobOffersContains(JobOffer jobOffer);
 }

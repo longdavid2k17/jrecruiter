@@ -5,7 +5,11 @@
       Naszym zadaniem jest uprościć do minimum proces rekrutacji aby w łatwy i przyjemny sposób można było znaleźć wymarzoną pracę w branży IT.
     </h3>
   </header>
+  <div style="text-align: center">
+    <h1>Najnowsze oferty</h1><br/>
+  </div>
   <div class="d-md-inline-flex row justify-content-center">
+
     <div class="col-md-5 col-lg-4 col-xl-3 col-sm-6 d-flex align-items-stretch" *ngFor="let tempOffer of jobOffers" style="margin: 10px">
       <div class=" card shadow-lg border-0 py-2">
         <div class="card-header border-0 mb-0">
@@ -40,16 +44,26 @@
           <div class="d-inline-flex row mb-3 ">
             <div class="col-md-auto">
               <ul class="list-inline my-0">
-                <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">UI</span></li>
-                <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">UX</span></li>
-                <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">photoshop</span></li>
-                <li class="list-inline-item "> <button class="badge badge-pill badge-primary" type="button">+4</button></li>
+                <div *ngIf="tempOffer.requirements.length ==0">
+                  <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">Brak sprecyzowanych wymagań</span></li>
+                </div>
+                <div *ngIf="tempOffer.requirements.length > 0 && tempOffer.requirements.length<=3">
+                  <div *ngFor="let requirement of tempOffer.requirements">
+                    <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">{{requirement.name}}</span></li>
+                  </div>
+                </div>
+                <div *ngIf="tempOffer.requirements.length > 3">
+                  <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">{{tempOffer.requirements[0].name}}</span></li>
+                  <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">{{tempOffer.requirements[1].name}}</span></li>
+                  <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">{{tempOffer.requirements[2].name}}</span></li>
+                  <li class="list-inline-item "> <button class="badge badge-pill badge-primary" type="button">+{{tempOffer.requirements.length-3}}</button></li>
+                </div>
               </ul>
             </div>
           </div>
           <div class="d-flex row mb-0">
             <div class="col ">
-              <p class="text-muted"> {{ tempOffer.positionDescription }} </p>
+              <p class="text-muted" size="50"> {{ tempOffer.positionDescription.slice(0,100) }}... </p>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {JobOffer} from "../../models/job-offer";
 import {JobOfferService} from "../../services/job-offer.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   jobOffers: JobOffer[]=[];
 
-  constructor(private jobOfferService:JobOfferService) { }
+  constructor(private jobOfferService:JobOfferService,private toastr:ToastrService) { }
 
   ngOnInit(): void
   {
@@ -20,22 +21,16 @@ export class HomeComponent implements OnInit {
 
   handleList()
   {
-    this.jobOfferService.getAllOffers().subscribe(
-      data => {
+    this.jobOfferService.getOffersHomeComponent().subscribe(
+      data =>
+      {
+        console.log(data);
         this.jobOffers = data;
       },
       err =>
       {
-        //this.content = JSON.parse(err.error).message;
+        this.toastr.error(err,'Błąd!')
       }
     );
-    /*setTimeout(()=> {
-      this.jobOffers.forEach( (element) =>
-      {
-        this.companyService.getCompanyByJobOfferId(element.id).subscribe(data =>{
-          element.company=data;
-        })
-      });
-    },500)*/
   }
 }

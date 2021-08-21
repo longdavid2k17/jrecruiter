@@ -1,5 +1,6 @@
 package com.dkantoch.jrecruiter.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -24,6 +25,7 @@ public class RecruitmentProcess
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "job_offer_id")
     private JobOffer jobOffer;

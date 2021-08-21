@@ -1,5 +1,13 @@
 import {Company} from "./company";
 
+export interface Requirement
+{
+  id:number;
+  name:string;
+  scaleIndicator:number;
+  creationDate:Date;
+}
+
 export interface JobOffer
 {
   id:number;
@@ -11,4 +19,5 @@ export interface JobOffer
   leadingTechnology:string;
   creationDate:Date;
   company:Company;
+  requirements:Requirement[];
 }

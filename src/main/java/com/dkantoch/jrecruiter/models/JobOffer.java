@@ -1,7 +1,6 @@
 package com.dkantoch.jrecruiter.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -18,8 +17,7 @@ import java.util.Set;
 @Table(name = "job_offers")
 @Getter
 @Setter
-@Data
-public class JobOffer
+public class JobOffer implements Comparable<JobOffer>
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +30,7 @@ public class JobOffer
     @NotBlank
     @Size(max = 1000)
     String positionDescription;
-    //List<String> requirements;
+
     @NotNull
     private Double lowEndPaymentRange;
 
@@ -50,112 +48,21 @@ public class JobOffer
     @JoinColumn(name = "company_id",nullable = false)
     private Company company;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "jobOffer")
     private Set<RecruitmentProcess> recruitmentProcesses;
+
+    @ManyToMany
+    @JoinTable(
+            name = "job_offer_requirements",
+            joinColumns = @JoinColumn(name = "joboffer_id"),
+            inverseJoinColumns = @JoinColumn(name = "requirement_id"))
+    private Set<Requirement> requirements;
 
     @NotNull
     @CreatedDate
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    Date creationDate;
-
-    public JobOffer(Long id, String positionTitle, String positionDescription, Double lowEndPaymentRange, Double highEndPaymentRange, String contractType, String leadingTechnology, Company company, Set<RecruitmentProcess> recruitmentProcesses, Date creationDate)
-    {
-        this.id = id;
-        this.positionTitle = positionTitle;
-        this.positionDescription = positionDescription;
-        this.lowEndPaymentRange = lowEndPaymentRange;
-        this.highEndPaymentRange = highEndPaymentRange;
-        this.contractType = contractType;
-        this.leadingTechnology = leadingTechnology;
-        this.company = company;
-        this.recruitmentProcesses = recruitmentProcesses;
-        this.creationDate = creationDate;
-    }
-
-    public JobOffer()
-    {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPositionTitle() {
-        return positionTitle;
-    }
-
-    public void setPositionTitle(String positionTitle) {
-        this.positionTitle = positionTitle;
-    }
-
-    public String getPositionDescription() {
-        return positionDescription;
-    }
-
-    public void setPositionDescription(String positionDescription) {
-        this.positionDescription = positionDescription;
-    }
-
-    public Double getLowEndPaymentRange() {
-        return lowEndPaymentRange;
-    }
-
-    public void setLowEndPaymentRange(Double lowEndPaymentRange) {
-        this.lowEndPaymentRange = lowEndPaymentRange;
-    }
-
-    public Double getHighEndPaymentRange() {
-        return highEndPaymentRange;
-    }
-
-    public void setHighEndPaymentRange(Double highEndPaymentRange) {
-        this.highEndPaymentRange = highEndPaymentRange;
-    }
-
-    public String getContractType() {
-        return contractType;
-    }
-
-    public void setContractType(String contractType) {
-        this.contractType = contractType;
-    }
-
-    public String getLeadingTechnology() {
-        return leadingTechnology;
-    }
-
-    public void setLeadingTechnology(String leadingTechnology) {
-        this.leadingTechnology = leadingTechnology;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public Set<RecruitmentProcess> getRecruitmentProcesses() {
-        return recruitmentProcesses;
-    }
-
-    public void setRecruitmentProcesses(Set<RecruitmentProcess> recruitmentProcesses) {
-        this.recruitmentProcesses = recruitmentProcesses;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
+    private Date creationDate;
 
     @Override
     public String toString() {
@@ -169,5 +76,11 @@ public class JobOffer
                 ", company=" + company +
                 ", creationDate=" + creationDate +
                 '}';
+    }
+
+    @Override
+    public int compareTo(JobOffer o)
+    {
+        return getCreationDate().compareTo(o.getCreationDate());
     }
 }

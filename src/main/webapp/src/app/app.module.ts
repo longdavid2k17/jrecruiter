@@ -13,13 +13,15 @@ import {AlertsModule} from "angular-alert-module";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {timeout} from "rxjs/operators";
+import {HomeComponent} from "./components/home/home.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchJobComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
     imports: [
       BrowserModule,

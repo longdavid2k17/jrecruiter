@@ -34,7 +34,6 @@ export class AppComponent {
     this.utilsService.getSoftwareVersion().subscribe(data => {
       this.version = data.version;
     });
-    console.log(this.version);
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {

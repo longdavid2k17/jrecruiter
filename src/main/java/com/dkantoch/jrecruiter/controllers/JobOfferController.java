@@ -1,8 +1,6 @@
 package com.dkantoch.jrecruiter.controllers;
 
 import com.dkantoch.jrecruiter.services.JobOfferService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/offers")
 public class JobOfferController
 {
-    private final Logger logger = LoggerFactory.getLogger(UtilsController.class);
     private final JobOfferService jobOfferService;
 
     public JobOfferController(JobOfferService jobOfferService)
@@ -30,10 +27,17 @@ public class JobOfferController
         return response;
     }
 
-    @GetMapping("/all/pageable")
+    @GetMapping("/pageable")
     public ResponseEntity<?> getAllOffersPageable(Pageable pageable)
     {
         ResponseEntity<?> response = jobOfferService.getAllOffersPageable(pageable);
+        return response;
+    }
+
+    @GetMapping("/home")
+    public ResponseEntity<?> getHomeOffers()
+    {
+        ResponseEntity<?> response = jobOfferService.getHomeOffers();
         return response;
     }
 }
