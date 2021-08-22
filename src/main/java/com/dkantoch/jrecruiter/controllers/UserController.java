@@ -1,5 +1,6 @@
 package com.dkantoch.jrecruiter.controllers;
 
+import com.dkantoch.jrecruiter.models.User;
 import com.dkantoch.jrecruiter.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,21 @@ public class UserController
     public ResponseEntity<?> getUserByUserEmail(@PathVariable String email)
     {
         ResponseEntity<?> response = userService.getUserByUserEmail(email);
+        return response;
+    }
+
+    @GetMapping("/getbyid/{id}")
+    public ResponseEntity<?> getUserByUserId(@PathVariable String id)
+    {
+        ResponseEntity<?> response = userService.getUserByUserId(id);
+        return response;
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody User user)
+    {
+        logger.warn("Recived: ID={}, {}",id,user);
+        ResponseEntity<?> response = userService.updateUser(id,user);
         return response;
     }
 }

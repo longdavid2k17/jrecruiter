@@ -16,6 +16,7 @@ import {timeout} from "rxjs/operators";
 import {HomeComponent} from "./components/home/home.component";
 import { DetailedOfferComponent } from './components/detailed-offer/detailed-offer.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     RegisterComponent,
     HomeComponent,
     DetailedOfferComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditProfileComponent
   ],
     imports: [
       BrowserModule,

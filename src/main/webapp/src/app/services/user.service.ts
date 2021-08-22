@@ -17,6 +17,17 @@ export class UserService {
     const searchUrl=`${API_URL}/getbyemail/${email}`;
     return this.http.get<User>(searchUrl);
   }
+  getUserById(id:string):Observable<User>
+  {
+    const searchUrl=`${API_URL}/getbyid/${id}`;
+    return this.http.get<User>(searchUrl);
+  }
+
+  update(id:string,formValues:User):Observable<User>
+  {
+    console.log(id+" "+formValues);
+    return this.http.put<User>(`${API_URL}/update/${id}`,formValues);
+  }
 }
 
 export class User

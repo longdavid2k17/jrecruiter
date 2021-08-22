@@ -1,0 +1,70 @@
+<div class="container">
+  <header class="jumbotron">
+    <h3>
+      Edytuj swój profil
+    </h3>
+  </header>
+  <div class="card shadow-lg border-0 py-2" style="padding: 20px;margin-bottom: 10%">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label><b>Imię</b></label>
+          <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+        </div>
+        <div class="form-group col-5">
+          <label><b>Nazwisko</b></label>
+          <input type="text" formControlName="surname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-7">
+          <label><b>Numer telefonu</b></label>
+          <input type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-7">
+          <label><b>Adres strony internetowej</b></label>
+          <input type="text" formControlName="websiteUrl" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-7">
+          <label><b>GitHub</b></label>
+          <input type="text" formControlName="githubUrl" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-7">
+          <label><b>Twitter</b></label>
+          <input type="text" formControlName="twitterUrl" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-7">
+          <label><b>Adres zdjęcia</b></label>
+          <input type="text" formControlName="profileImgUrl" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-7">
+          <label><b>CV</b></label>
+          <input type="text" formControlName="cvPath" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-7">
+          <label><b>Email</b></label>
+          <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        </div>
+      </div>
+      <div class="form-group" style="text-align: center">
+        <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Zapisz
+        </button>
+        <a routerLink="/profile" class="btn btn-link">Anuluj</a>
+      </div>
+    </form>
+  </div>
+</div>

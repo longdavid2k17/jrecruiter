@@ -37,7 +37,7 @@ public class User
     @Size(max = 120)
     private String password;
 
-    @Size(max = 150)
+    @Size(max = 350)
     private String profileImgUrl;
 
     @Size(max = 150)
@@ -51,15 +51,12 @@ public class User
     @Size(max = 50)
     private String name;
 
-    @NotBlank
     @Size(max = 100)
     private String websiteUrl;
 
-    @NotBlank
     @Size(max = 100)
     private String githubUrl;
 
-    @NotBlank
     @Size(max = 100)
     private String twitterUrl;
 

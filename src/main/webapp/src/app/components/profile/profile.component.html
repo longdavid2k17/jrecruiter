@@ -12,7 +12,7 @@
             <img src="{{currentUserFromRepo.profileImgUrl}}" alt="Ustaw swój awatar w edycji profilu" class="rounded-circle" width="150">
             <div class="mt-3">
               <h4>{{ currentUserFromRepo.name }} {{ currentUserFromRepo.surname }}</h4>
-              <button class="btn btn-outline-primary">Edytuj swój profil</button>
+              <button class="btn btn-outline-primary" routerLink="/editprofile/{{currentUserFromRepo.id}}">Edytuj swój profil</button>
             </div>
           </div>
         </div>
