@@ -15,6 +15,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {timeout} from "rxjs/operators";
 import {HomeComponent} from "./components/home/home.component";
 import { DetailedOfferComponent } from './components/detailed-offer/detailed-offer.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DetailedOfferComponent } from './components/detailed-offer/detailed-off
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    DetailedOfferComponent
+    DetailedOfferComponent,
+    ProfileComponent
   ],
     imports: [
       BrowserModule,

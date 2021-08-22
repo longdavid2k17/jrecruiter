@@ -13,7 +13,10 @@ import java.util.Set;
 @Entity
 @Table(name = "users",uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
-        @UniqueConstraint(columnNames = "email")
+        @UniqueConstraint(columnNames = "email"),
+        @UniqueConstraint(columnNames = "websiteUrl"),
+        @UniqueConstraint(columnNames = "githubUrl"),
+        @UniqueConstraint(columnNames = "twitterUrl")
 })
 public class User
 {
@@ -49,6 +52,18 @@ public class User
     private String name;
 
     @NotBlank
+    @Size(max = 100)
+    private String websiteUrl;
+
+    @NotBlank
+    @Size(max = 100)
+    private String githubUrl;
+
+    @NotBlank
+    @Size(max = 100)
+    private String twitterUrl;
+
+    @NotBlank
     @Size(max = 50)
     private String surname;
 
@@ -67,7 +82,7 @@ public class User
 
     }
 
-    public User(Long id, String username, String email, String password, String profileImgUrl, String cvPath, String phoneNumber, String name, String surname, Set<Role> roles, Set<RecruitmentProcess> recruitmentProcesses)
+    public User(Long id, String username, String email, String password, String profileImgUrl, String cvPath, String phoneNumber, String name, String websiteUrl, String githubUrl, String twitterUrl, String surname, Set<Role> roles, Set<RecruitmentProcess> recruitmentProcesses)
     {
         this.id = id;
         this.username = username;
@@ -77,12 +92,15 @@ public class User
         this.cvPath = cvPath;
         this.phoneNumber = phoneNumber;
         this.name = name;
+        this.websiteUrl = websiteUrl;
+        this.githubUrl = githubUrl;
+        this.twitterUrl = twitterUrl;
         this.surname = surname;
         this.roles = roles;
         this.recruitmentProcesses = recruitmentProcesses;
     }
 
-    public User(String username, String email, String password, String name, String surname,String phoneNumber)
+    public User(String username, String email, String password, String name, String surname, String phoneNumber)
     {
         this.username = username;
         this.email = email;
@@ -90,6 +108,30 @@ public class User
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.surname = surname;
+    }
+
+    public String getWebsiteUrl() {
+        return websiteUrl;
+    }
+
+    public void setWebsiteUrl(String websiteUrl) {
+        this.websiteUrl = websiteUrl;
+    }
+
+    public String getGithubUrl() {
+        return githubUrl;
+    }
+
+    public void setGithubUrl(String githubUrl) {
+        this.githubUrl = githubUrl;
+    }
+
+    public String getTwitterUrl() {
+        return twitterUrl;
+    }
+
+    public void setTwitterUrl(String twitterUrl) {
+        this.twitterUrl = twitterUrl;
     }
 
     public Long getId() {
@@ -181,8 +223,7 @@ public class User
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
@@ -192,6 +233,9 @@ public class User
                 ", cvPath='" + cvPath + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", name='" + name + '\'' +
+                ", websiteUrl='" + websiteUrl + '\'' +
+                ", githubUrl='" + githubUrl + '\'' +
+                ", twitterUrl='" + twitterUrl + '\'' +
                 ", surname='" + surname + '\'' +
                 ", roles=" + roles +
                 ", recruitmentProcesses=" + recruitmentProcesses +
@@ -203,11 +247,11 @@ public class User
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(profileImgUrl, user.profileImgUrl) && Objects.equals(cvPath, user.cvPath) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(roles, user.roles) && Objects.equals(recruitmentProcesses, user.recruitmentProcesses);
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(profileImgUrl, user.profileImgUrl) && Objects.equals(cvPath, user.cvPath) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(name, user.name) && Objects.equals(websiteUrl, user.websiteUrl) && Objects.equals(githubUrl, user.githubUrl) && Objects.equals(twitterUrl, user.twitterUrl) && Objects.equals(surname, user.surname) && Objects.equals(roles, user.roles) && Objects.equals(recruitmentProcesses, user.recruitmentProcesses);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, password, profileImgUrl, cvPath, phoneNumber, name, surname, roles, recruitmentProcesses);
+        return Objects.hash(id, username, email, password, profileImgUrl, cvPath, phoneNumber, name, websiteUrl, githubUrl, twitterUrl, surname, roles, recruitmentProcesses);
     }
 }
