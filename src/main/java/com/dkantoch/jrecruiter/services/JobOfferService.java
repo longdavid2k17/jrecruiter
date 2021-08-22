@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -76,5 +77,16 @@ public class JobOfferService
         else
             return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Błąd podczas pobierania!"));
         return ResponseEntity.ok().body(homeList);
+    }
+
+    public ResponseEntity<?> getById(Long id)
+    {
+        Optional<JobOffer> offerOptional = jobOfferRepository.findById(id);
+        if(offerOptional.isPresent())
+        {
+            return ResponseEntity.ok().body(offerOptional.get());
+        }
+        else
+            return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Nie znaleziono pozycji!"));
     }
 }

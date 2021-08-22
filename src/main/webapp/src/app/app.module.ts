@@ -14,6 +14,7 @@ import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {timeout} from "rxjs/operators";
 import {HomeComponent} from "./components/home/home.component";
+import { DetailedOfferComponent } from './components/detailed-offer/detailed-offer.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {HomeComponent} from "./components/home/home.component";
     SearchJobComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    DetailedOfferComponent
   ],
     imports: [
       BrowserModule,
@@ -33,7 +35,7 @@ import {HomeComponent} from "./components/home/home.component";
       NgbModule,
       BrowserAnimationsModule,
       ToastrModule.forRoot({
-        timeOut:3000,
+        timeOut:5000,
         progressBar:true,
         progressAnimation:'increasing',
         preventDuplicates: true,

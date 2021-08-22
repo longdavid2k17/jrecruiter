@@ -24,6 +24,12 @@ export class JobOfferService
     return this.getOffers(this.baseUrl);
   }
 
+  getOffer(offerId: number) :Observable<JobOffer>
+  {
+    const offerUrl = `${this.baseUrl}/id/${offerId}`;
+    return this.http.get<JobOffer>(offerUrl);
+  }
+
   private getOffers(searchUrl: string): Observable<JobOffer[]>
   {
     if(!this.homeSelector)

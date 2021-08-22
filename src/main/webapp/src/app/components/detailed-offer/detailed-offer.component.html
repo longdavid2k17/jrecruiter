@@ -1,0 +1,61 @@
+<div class="container-fluid ">
+  <div class="d-md-inline-flex row justify-content-center">
+    <div class="card shadow-lg border-0 py-2">
+      <div class="card-header border-0 mb-0">
+        <div class="row justify-content-between">
+          <div class="col-auto col-sm-auto">
+            <h4>
+              <div *ngIf="offer.contractType =='Umowa o pracę'">
+                <span class="badge badge-pill badge-success">{{offer.contractType}}</span>
+              </div>
+              <div *ngIf="offer.contractType =='Umowa zlecenie'">
+                <span class="badge badge-pill badge-primary">{{offer.contractType}}</span>
+              </div>
+              <div *ngIf="offer.contractType =='Staż'">
+                <span class="badge badge-pill badge-warning">{{offer.contractType}}</span>
+              </div>
+              <div *ngIf="offer.contractType =='Umowa o dzieło'">
+                <span class="badge badge-pill badge-danger">{{offer.contractType}}</span>
+              </div>
+            </h4>
+          </div>
+          <div class="col-auto col-sm-auto">
+            <div class="row mx-auto pt-2">
+              <h6>od {{offer.lowEndPaymentRange}} do {{ offer.highEndPaymentRange }} PLN</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body text-center pb-0 mt-0 pt-3">
+        <div class="d-block">
+          <h3 class="card-title mb-0 font-weight-bold">{{offer.positionTitle}}</h3>
+          <small class="text-info my-1"> <i class="fa fa-file-code-o small"></i> {{offer.company.companyName}}</small>
+        </div>
+        <div class="d-block">
+          <h5 class="card-title mb-0 font-weight-bold">Wymagania</h5>
+        </div>
+
+        <div class="d-inline-flex row mb-3 ">
+          <div class="col-md-auto">
+            <ul class="list-group my-0">
+              <div *ngFor="let requirement of offer.requirements">
+                <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">{{requirement.name}}</span></li>
+              </div>
+            </ul>
+          </div>
+        </div>
+        <div class="d-flex row mb-0">
+          <div class="col ">
+            <p class="text-muted" style="text-align: left"> {{ offer.positionDescription }}</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <hr class="hl">
+      </div>
+      <div class="card-footer border-0 text-center mx-auto ">
+        <h5 class="footer"> <a routerLink="/oferta/{{offer.id}}" class="text-decoration-none"> Aplikuj</a></h5>
+      </div>
+    </div>
+  </div>
+</div>
