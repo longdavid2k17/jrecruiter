@@ -28,25 +28,48 @@
       </div>
       <div class="card-body text-center pb-0 mt-0 pt-3">
         <div class="d-block">
-          <h3 class="card-title mb-0 font-weight-bold">{{offer.positionTitle}}</h3>
-          <small class="text-info my-1"> <i class="fa fa-file-code-o small"></i> {{offer.company.companyName}}</small>
+          <h2 class="card-title mb-0 font-weight-bold">{{offer.positionTitle}}</h2>
         </div>
-        <div class="d-block">
-          <h5 class="card-title mb-0 font-weight-bold">Wymagania</h5>
+        <div>
+          <hr class="hl">
         </div>
 
-        <div class="d-inline-flex row mb-3 ">
-          <div class="col-md-auto">
-            <ul class="list-group my-0">
-              <div *ngFor="let requirement of offer.requirements">
-                <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">{{requirement.name}}</span></li>
-              </div>
-            </ul>
+        <div class="row">
+
+          <div class="col-lg">
+            <div class="d-block" style="text-align: left">
+              <h4 class="card-title mb-0 font-weight-bold">O firmie</h4>
+              <h4 class="text-info my-1"> <i class="fa fa-file-code-o small"></i>{{offer.company.companyName}}</h4>
+              <article>{{offer.company.description}}</article>
+              <br/>
+              <p>Lokalizacja: <b>{{offer.company.localization}}</b></p>
+            </div>
           </div>
+
+          <div class="col-lg">
+            <div class="d-block" style="text-align: right">
+              <h4 class="card-title mb-0 font-weight-bold">Wymagania</h4>
+              <div class="d-inline-flex row mb-3 " >
+                <div class="col-md-auto">
+                  <ul class="list-group my-0">
+                    <div *ngIf="offer.requirements.length ==0">
+                      <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">Brak sprecyzowanych wymagań</span></li>
+                    </div>
+                    <div *ngFor="let requirement of offer.requirements">
+                      <li class="list-inline-item"> <span class="badge badge-pill badge-outline ">{{requirement.name}}</span></li>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
+
+        <hr class="hl">
         <div class="d-flex row mb-0">
           <div class="col ">
-            <p class="text-muted" style="text-align: left"> {{ offer.positionDescription }}</p>
+            <p class="text-muted" style="text-align: center"> {{ offer.positionDescription }}</p>
           </div>
         </div>
       </div>
@@ -54,7 +77,9 @@
         <hr class="hl">
       </div>
       <div class="card-footer border-0 text-center mx-auto ">
-        <h5 class="footer"> <a routerLink="/oferta/{{offer.id}}" class="text-decoration-none"> Aplikuj</a></h5>
+        <h2>
+          <a routerLink="/job/{{offer.id}}" class="text-decoration-none" title="Kliknięcie przekieruje cię do procesu rekrutacyjnego"> Aplikuj</a>
+        </h2>
       </div>
     </div>
   </div>
