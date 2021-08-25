@@ -42,4 +42,6 @@ export class User
   websiteUrl:string="";
   githubUrl:string="";
   twitterUrl:string="";
+  recruiter:boolean=false;
+  recruiter_account_id?:number;
 }

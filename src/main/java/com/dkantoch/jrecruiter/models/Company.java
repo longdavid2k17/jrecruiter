@@ -1,17 +1,12 @@
 package com.dkantoch.jrecruiter.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,6 +34,10 @@ public class Company
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
     private Set<JobOffer> jobOffers = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "connectedCompany")
+    private Set<RecruiterAccount> connectedRecruiters = new HashSet<>();
 
     @Override
     public String toString()

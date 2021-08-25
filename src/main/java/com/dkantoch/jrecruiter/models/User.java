@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Objects;
@@ -60,6 +61,11 @@ public class User
     @Size(max = 100)
     private String twitterUrl;
 
+    private Long recruiter_account_id;
+
+    @NotNull
+    private Boolean isRecruiter;
+
     @NotBlank
     @Size(max = 50)
     private String surname;
@@ -79,7 +85,7 @@ public class User
 
     }
 
-    public User(Long id, String username, String email, String password, String profileImgUrl, String bio, String phoneNumber, String name, String websiteUrl, String githubUrl, String twitterUrl, String surname, Set<Role> roles, Set<RecruitmentProcess> recruitmentProcesses)
+    public User(Long id, String username, String email, String password, String profileImgUrl, String bio, String phoneNumber, String name, String websiteUrl, String githubUrl, String twitterUrl, Long recruiter_account_id, Boolean isRecruiter, String surname, Set<Role> roles, Set<RecruitmentProcess> recruitmentProcesses)
     {
         this.id = id;
         this.username = username;
@@ -92,6 +98,8 @@ public class User
         this.websiteUrl = websiteUrl;
         this.githubUrl = githubUrl;
         this.twitterUrl = twitterUrl;
+        this.recruiter_account_id = recruiter_account_id;
+        this.isRecruiter = isRecruiter;
         this.surname = surname;
         this.roles = roles;
         this.recruitmentProcesses = recruitmentProcesses;
@@ -219,6 +227,22 @@ public class User
         this.recruitmentProcesses = recruitmentProcesses;
     }
 
+    public Long getRecruiter_account_id() {
+        return recruiter_account_id;
+    }
+
+    public void setRecruiter_account_id(Long recruiter_account_id) {
+        this.recruiter_account_id = recruiter_account_id;
+    }
+
+    public Boolean getRecruiter() {
+        return isRecruiter;
+    }
+
+    public void setRecruiter(Boolean recruiter) {
+        isRecruiter = recruiter;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -233,6 +257,8 @@ public class User
                 ", websiteUrl='" + websiteUrl + '\'' +
                 ", githubUrl='" + githubUrl + '\'' +
                 ", twitterUrl='" + twitterUrl + '\'' +
+                ", recruiter_account_id=" + recruiter_account_id +
+                ", isRecruiter=" + isRecruiter +
                 ", surname='" + surname + '\'' +
                 ", roles=" + roles +
                 ", recruitmentProcesses=" + recruitmentProcesses +

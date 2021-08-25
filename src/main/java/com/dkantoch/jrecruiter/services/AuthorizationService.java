@@ -113,6 +113,7 @@ public class AuthorizationService
                 }
             });
         }
+        user.setRecruiter(false);
         user.setRoles(roles);
         userRepository.save(user);
 
@@ -170,6 +171,7 @@ public class AuthorizationService
                 }
             });
         }
+        user.setRecruiter(true);
         user.setRoles(roles);
         userRepository.save(user);
 
