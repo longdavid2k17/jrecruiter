@@ -44,4 +44,16 @@ public class AuthController
         else
             return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Żądanie jest niepoprawne!"));
     }
+
+    @PostMapping("/signup_moderator")
+    public ResponseEntity<?> registerModerator(@Valid @RequestBody SignupRequest signUpRequest)
+    {
+        if(signUpRequest!=null)
+        {
+            ResponseEntity<?> authenticationState = authorizationService.registerModerator(signUpRequest);
+            return authenticationState;
+        }
+        else
+            return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Żądanie jest niepoprawne!"));
+    }
 }

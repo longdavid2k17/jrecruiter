@@ -122,11 +122,15 @@
         <span><a href="#" id="forgot_pswd">Rejestrując się akceptujesz regulamin</a></span>
         <button class="btn btn-primary btn-block">Zarejestruj się</button>
       </div>
-
+      <div class="form-horizontal" style="padding: 10px; text-align: center; margin: 20px;">
+        <label for="moderatorMode"><b>Chcę utworzyć konto rekrutera </b></label>
+        <span style="margin-left: 10px;padding-top: 5px"><input type="checkbox" id="moderatorMode" (change)="eventCheck($event)"></span>
+      </div>
       <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
         Rejestracja nieudana!<br />{{ errorMessage }}
       </div>
     </form>
+
   </div>
   <div class="alert alert-success" *ngIf="isSuccessful">
     Zarejestrowałeś się poprawnie!

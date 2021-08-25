@@ -32,4 +32,16 @@ export class AuthService {
       phoneNumber
     }, httpOptions);
   }
+
+  registerModerator(username: string, email: string, password: string,name: string,surname: string,phoneNumber:string): Observable<any>
+  {
+    return this.http.post(AUTH_API + 'signup_moderator', {
+      username,
+      email,
+      password,
+      name,
+      surname,
+      phoneNumber
+    }, httpOptions);
+  }
 }

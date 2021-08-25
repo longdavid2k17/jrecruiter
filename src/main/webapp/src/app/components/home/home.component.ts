@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
     this.jobOfferService.getOffersHomeComponent().subscribe(
       data =>
       {
-        console.log(data);
         this.jobOffers = data;
       },
       err =>

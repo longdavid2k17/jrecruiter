@@ -8,7 +8,7 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  moderator:boolean=false;
   form: any = {
     username: null,
     email: null,
@@ -29,18 +29,40 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     const { username, email, password, name, surname,phoneNumber } = this.form;
 
-    this.authService.register(username, email, password, name, surname,phoneNumber).subscribe(
-      data => {
-        console.log(data);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-        this.toastr.success('Zarejestrowano!');
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
+    if(!this.moderator)
+    {
+      this.authService.register(username, email, password, name, surname,phoneNumber).subscribe(
+        data => {
+          console.log(data);
+          this.isSuccessful = true;
+          this.isSignUpFailed = false;
+          this.toastr.success('Zarejestrowano!');
+        },
+        err => {
+          this.errorMessage = err.error.message;
+          this.isSignUpFailed = true;
+        }
+      );
+    }
+    else
+    {
+      this.authService.registerModerator(username, email, password, name, surname,phoneNumber).subscribe(
+        data => {
+          console.log(data);
+          this.isSuccessful = true;
+          this.isSignUpFailed = false;
+          this.toastr.success('Zarejestrowano!');
+        },
+        err => {
+          this.errorMessage = err.error.message;
+          this.isSignUpFailed = true;
+        }
+      );
+    }
   }
 
+  eventCheck(event:any)
+  {
+    this.moderator=event.target.checked;
+  }
 }
