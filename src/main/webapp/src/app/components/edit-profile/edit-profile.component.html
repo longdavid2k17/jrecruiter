@@ -25,31 +25,25 @@
       <div class="form-row">
         <div class="form-group col-7">
           <label><b>Adres strony internetowej</b></label>
-          <input type="text" formControlName="websiteUrl" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <input type="text" formControlName="websiteUrl" class="form-control" placeholder="Masz ciekawą stronę? Podlinkuj ją koniecznie!" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-7">
           <label><b>GitHub</b></label>
-          <input type="text" formControlName="githubUrl" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <input type="text" formControlName="githubUrl" class="form-control" placeholder="Pochwal się projektami na GitHub" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-7">
           <label><b>Twitter</b></label>
-          <input type="text" formControlName="twitterUrl" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <input type="text" formControlName="twitterUrl" class="form-control" placeholder="Podziel się profilem na Twitterze" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-7">
-          <label><b>Adres zdjęcia</b></label>
-          <input type="text" formControlName="profileImgUrl" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-7">
-          <label><b>CV</b></label>
-          <input type="text" formControlName="cvPath" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <label><b>Twoje Bio</b></label>
+          <input type="text" formControlName="bio" class="form-control" placeholder="Opowiedz o sobie " [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
         </div>
       </div>
       <div class="form-row">
@@ -66,5 +60,11 @@
         <a routerLink="/profile" class="btn btn-link">Anuluj</a>
       </div>
     </form>
+  </div>
+
+  <div class="card shadow-lg border-0 py-2 bg-body rounded" style="padding: 20px;margin-bottom: 10%">
+      <h3>Dodaj awatar</h3><br/>
+      <input type="file" id="customFile" (change)="selectFile($event)"><br/>
+      <button class="btn btn-primary" [disabled]="!selectedFiles" (click)="upload()">Zapisz</button>
   </div>
 </div>

@@ -9,7 +9,7 @@
       <div class="card">
         <div class="card-body">
           <div class="d-flex flex-column align-items-center text-center">
-            <img src="{{currentUserFromRepo.profileImgUrl}}" alt="Ustaw swój awatar w edycji profilu" class="rounded-circle" width="150">
+            <img [src]='photoURL()' alt="Ustaw swój awatar w edycji profilu" class="rounded-circle" width="150">
             <div class="mt-3">
               <h4>{{ currentUserFromRepo.name }} {{ currentUserFromRepo.surname }}</h4>
               <button class="btn btn-outline-primary" routerLink="/editprofile/{{currentUserFromRepo.id}}">Edytuj swój profil</button>
@@ -90,18 +90,17 @@
           <hr>
           <div class="row">
             <div class="col-sm-3">
-              <h6 class="mb-0">CV dołączone do profilu</h6>
+              <h6 class="mb-0">Bio</h6>
             </div>
-            <div class="col-sm-9 text-secondary" *ngIf="currentUserFromRepo.cvPath">
-              <span>{{currentUserFromRepo.cvPath}}</span>
-            </div>
-            <div>
-              <div *ngIf="!currentUserFromRepo.cvPath" class="col-sm-12 text-secondary">
-                <span>Nie posiadasz załadowanego CV do naszej bazy.</span>
+            <div class="col-sm-9 text-secondary">
+              <div *ngIf="currentUserFromRepo.bio">
+              <span>{{currentUserFromRepo.bio}}</span>
+              </div>
+              <div *ngIf="!currentUserFromRepo.bio">
+                <span>Opowiedz rekruterom o sobie</span>
               </div>
             </div>
           </div>
-
         </div>
       </div>
       <div class="row gutters-sm">

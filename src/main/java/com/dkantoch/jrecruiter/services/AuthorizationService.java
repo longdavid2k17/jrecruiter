@@ -79,7 +79,7 @@ public class AuthorizationService
         }
 
         User user = new User(signupRequest.getUsername(), signupRequest.getEmail(), encoder.encode(signupRequest.getPassword()), signupRequest.getName(), signupRequest.getSurname(), signupRequest.getPhoneNumber());
-
+        user.setBio("");
         Set<String> strRoles = signupRequest.getRole();
         Set<Role> roles = new HashSet<>();
 

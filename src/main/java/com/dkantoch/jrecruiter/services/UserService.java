@@ -2,13 +2,20 @@ package com.dkantoch.jrecruiter.services;
 
 import com.dkantoch.jrecruiter.models.User;
 import com.dkantoch.jrecruiter.repositories.UserRepository;
+import com.dkantoch.jrecruiter.security.JWTUtils;
 import com.dkantoch.jrecruiter.utils.ToJsonString;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.Base64;
 import java.util.Optional;
 
 @Service
@@ -16,10 +23,14 @@ public class UserService
 {
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
+    private final JWTUtils jwtUtils;
+    private final FileStoreService fileStoreService;
 
-    public UserService(UserRepository userRepository)
+    public UserService(UserRepository userRepository,JWTUtils jwtUtils, FileStoreService fileStoreService)
     {
         this.userRepository = userRepository;
+        this.jwtUtils = jwtUtils;
+        this.fileStoreService = fileStoreService;
     }
 
     public ResponseEntity<?> getUserByUserEmail(String email)
@@ -30,6 +41,18 @@ public class UserService
         else
         {
             logger.error("User with email {} not found!",email);
+            return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Nie znaleziono powiązanego profilu!"));
+        }
+    }
+
+    public ResponseEntity<?> getUserByUserUsername(String username)
+    {
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+        if(optionalUser.isPresent())
+            return ResponseEntity.ok().body(optionalUser.get());
+        else
+        {
+            logger.error("User with username {} not found!",username);
             return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Nie znaleziono powiązanego profilu!"));
         }
     }
@@ -71,13 +94,15 @@ public class UserService
                     dbUser.setTwitterUrl(user.getTwitterUrl());
                 if(user.getProfileImgUrl()!=null && !dbUser.getProfileImgUrl().equals(user.getProfileImgUrl()))
                     dbUser.setProfileImgUrl(user.getProfileImgUrl());
+                if(user.getBio()!=null && !dbUser.getBio().equals(user.getBio()))
+                    dbUser.setBio(user.getBio());
 
                 User savedUser = userRepository.save(dbUser);
-                logger.info("Saved: {}",savedUser);
                 return ResponseEntity.ok().body(savedUser);
             }
             catch (Exception e)
             {
+                e.printStackTrace();
                 logger.error(e.getMessage());
                 return ResponseEntity.badRequest().body(e.getMessage());
             }
@@ -85,5 +110,46 @@ public class UserService
         }
         else
             return ResponseEntity.badRequest().body("Nie znaleziono powiązanego profilu!");
+    }
+
+    public ResponseEntity<?> uploadImage(MultipartFile multipartFile, String token)
+    {
+        try
+        {
+            if(token!=null)
+            {
+                String username = jwtUtils.getUserNameFromJwtToken(token);
+                User user = (User) getUserByUserUsername(username).getBody();
+                if(user!=null && !multipartFile.isEmpty())
+                {
+                    if(user.getProfileImgUrl()!=null)
+                    {
+                        boolean operationResult = fileStoreService.deleteOldImage(user.getProfileImgUrl());
+                        if(!operationResult)
+                            logger.error("Error while deleting old files from storage!");
+                    }
+                    String imageUrl = fileStoreService.saveFile(multipartFile,username,true);
+                    if(imageUrl!=null && !imageUrl.equals(""))
+                    {
+                        user.setProfileImgUrl(imageUrl);
+                        userRepository.save(user);
+                        return ResponseEntity.ok().body(ToJsonString.toJsonString("Zapisano obraz!"));
+                    }
+                    else
+                        return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Błąd podczas zapisywania!"));
+
+                }
+                else
+                    return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Błąd! Nie znaleziono takiego użytkownika!"));
+            }
+            else return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Błąd! Nie znaleziono takiego użytkownika!"));
+
+        }
+        catch (Exception e)
+        {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Błąd! "+e.getMessage()));
+        }
     }
 }

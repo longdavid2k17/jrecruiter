@@ -25,7 +25,6 @@ export class UserService {
 
   update(id:string,formValues:User):Observable<User>
   {
-    console.log(id+" "+formValues);
     return this.http.put<User>(`${API_URL}/update/${id}`,formValues);
   }
 }
@@ -39,7 +38,7 @@ export class User
   surname:string="";
   profileImgUrl:string="";
   phoneNumber:string="";
-  cvPath:string="";
+  bio:string="";
   websiteUrl:string="";
   githubUrl:string="";
   twitterUrl:string="";
