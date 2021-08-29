@@ -126,4 +126,17 @@ public class CompanyService
         else
             return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Przekazane parametry są niepoprawne!"));
     }
+
+    public ResponseEntity<?> edit(Long id, Company company)
+    {
+        if(id!=null)
+        {
+            Company entityToSave = company;
+            entityToSave.setId(id);
+            Company saved = companyRepository.save(entityToSave);
+            return ResponseEntity.ok().body(saved);
+        }
+        else
+            return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Przekazane parametry są niepoprawne!"));
+    }
 }

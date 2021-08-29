@@ -37,7 +37,6 @@ public class CompanyController
     @PostMapping("/save/forId/{id}")
     public ResponseEntity<?> createNewCompany(@RequestBody Company company, @PathVariable Long id)
     {
-        logger.warn("Recived ID={}, data={}",id,company);
         ResponseEntity<?> response = companyService.createNewCompany(company,id);
         return response;
     }
@@ -46,6 +45,13 @@ public class CompanyController
     public ResponseEntity<?> saveCompany(@RequestBody Company company)
     {
         ResponseEntity<?> response = companyService.save(company);
+        return response;
+    }
+
+    @PostMapping("/edit/{id}")
+    public ResponseEntity<?> editCompany(@RequestBody Company company, @PathVariable Long id)
+    {
+        ResponseEntity<?> response = companyService.edit(id,company);
         return response;
     }
 }

@@ -34,9 +34,9 @@ export class CompanyService {
       return this.http.post<Company>(`${this.COMPANY_API_URL}/save/forId/${accountId}`,value);
     }
 
-  saveCompany(value: Company)
+  editCompany(id:string,value: Company)
   {
-    return this.http.post<Company>(`${this.COMPANY_API_URL}/save`,value);
+    return this.http.post<Company>(`${this.COMPANY_API_URL}/edit/${id}`,value);
   }
 }
 
