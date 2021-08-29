@@ -4,18 +4,13 @@ import com.dkantoch.jrecruiter.models.User;
 import com.dkantoch.jrecruiter.repositories.UserRepository;
 import com.dkantoch.jrecruiter.security.JWTUtils;
 import com.dkantoch.jrecruiter.utils.ToJsonString;
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.util.Base64;
 import java.util.Optional;
 
 @Service
@@ -151,5 +146,11 @@ public class UserService
             e.printStackTrace();
             return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Błąd! "+e.getMessage()));
         }
+    }
+
+    public Optional<User> getUserById(Long id)
+    {
+        Optional<User> optionalUser = userRepository.findById(id);
+        return optionalUser;
     }
 }

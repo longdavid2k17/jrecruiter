@@ -17,6 +17,10 @@ import {HomeComponent} from "./components/home/home.component";
 import { DetailedOfferComponent } from './components/detailed-offer/detailed-offer.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { AddCompanyComponent } from './components/add-company/add-company.component';
+import { EditCompanyComponent } from './components/edit-company/edit-company.component';
+import { AddJobOfferComponent } from './components/add-job-offer/add-job-offer.component';
+import { ManageJobOffersComponent } from './components/manage-job-offers/manage-job-offers.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     HomeComponent,
     DetailedOfferComponent,
     ProfileComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    AddCompanyComponent,
+    EditCompanyComponent,
+    AddJobOfferComponent,
+    ManageJobOffersComponent
   ],
     imports: [
       BrowserModule,

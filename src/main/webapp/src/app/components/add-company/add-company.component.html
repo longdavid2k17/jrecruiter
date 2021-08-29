@@ -1,0 +1,52 @@
+<div class="container">
+  <header>
+    <div class="card shadow-lg border-0 py-2 bg-body rounded" style="padding: 20px;margin-bottom: 10%; margin-top: 10%">
+      <h3>Wybierz firmę dla której pracujesz z listy poniżej</h3><br/>
+      <form [formGroup]="savetoExistingForm">
+        <div class="form-group" style="text-align: center">
+          <select class="custom-select" (change)="changeCompany($event)" formControlName="company">
+          <option value="" disabled>Wybierz</option>
+          <option *ngFor="let company of companies" [ngValue]="company">{{company.companyName}}</option>
+          </select>
+        </div>
+        <div class="form-group" style="text-align: center">
+          <div style="width: 50%; text-align: center; margin-left: 25%">
+            <button type="submit" class="btn btn-info btn-lg btn-block">Przypisz firmę</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </header>
+
+
+  <div class="card shadow-lg border-0 py-2 bg-body rounded" style="padding: 20px;margin-bottom: 10%">
+    <h3>Nie ma twojej firmy? Dodaj ją</h3><br/>
+    <form [formGroup]="savetoNewOneForm" (ngSubmit)="onSubmit()">
+      <div class="form-group" style="text-align: center">
+        <div class="form-row">
+          <div class="form-group col-7">
+            <label><b>Nazwa firmy</b></label>
+            <input type="text" formControlName="companyName" class="form-control" placeholder="Nazwa" [ngClass]="{ 'is-invalid': submitted  }" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-7">
+            <label><b>Podstawowa lokalizacja</b></label>
+            <input type="text" formControlName="localization" class="form-control" placeholder="Główna siedziba firmy" [ngClass]="{ 'is-invalid': submitted  }" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-7">
+            <label><b>Krótki opis firmy</b></label>
+            <input type="text" formControlName="description" class="form-control" placeholder="Opis działalności" [ngClass]="{ 'is-invalid': submitted}" />
+          </div>
+        </div>
+      </div>
+      <div class="form-group" style="text-align: center">
+        <div style="width: 50%; text-align: center; margin-left: 25%">
+          <button type="submit" class="btn btn-info btn-lg btn-block">Utwórz konto firmy</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

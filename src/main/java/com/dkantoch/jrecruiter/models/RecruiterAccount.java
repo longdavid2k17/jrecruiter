@@ -18,5 +18,13 @@ public class RecruiterAccount
     @ManyToOne
     private Company connectedCompany;
 
+    public RecruiterAccount(Company connectedCompany)
+    {
+        this.connectedCompany = connectedCompany;
+    }
 
+    public RecruiterAccount()
+    {
+
+    }
 }
