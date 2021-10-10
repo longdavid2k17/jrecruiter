@@ -49,12 +49,6 @@ public class UserController
         return response;
     }
 
-    /*@PostMapping("/upload_image")
-    public ResponseEntity<?> uploadProfileImage(@RequestParam("file") MultipartFile file, @RequestHeader("Authorization") String token)
-    {
-        ResponseEntity<?> response = userService.uploadImage(file,token);
-        return response;
-    }*/
     @PostMapping("/upload_image")
     public ResponseEntity<?> handleFileUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception
     {

@@ -25,9 +25,9 @@ export class EditCompanyComponent implements OnInit {
   ngOnInit(): void
   {
     this.form = this.formBuilder.group({
-      companyName: ['', Validators.required],
+      company: ['', Validators.required],
       localization: ['', Validators.required],
-      description: ['', Validators.required]
+      positionDescription: ['', Validators.required]
     });
 
     this.currentLoggedUser = this.tokenStorage.getUser();

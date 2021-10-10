@@ -3,6 +3,7 @@ package com.dkantoch.jrecruiter.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -64,6 +65,11 @@ public class JobOffer implements Comparable<JobOffer>
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date creationDate;
 
+    @NotNull
+    @UpdateTimestamp
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date modificationDate;
+
     @Override
     public String toString() {
         return "JobOffer{" +
@@ -75,6 +81,7 @@ public class JobOffer implements Comparable<JobOffer>
                 ", contractType='" + contractType + '\'' +
                 ", company=" + company +
                 ", creationDate=" + creationDate +
+                ", modificationDate=" + modificationDate +
                 '}';
     }
 

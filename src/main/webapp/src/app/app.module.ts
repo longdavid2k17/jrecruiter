@@ -21,6 +21,7 @@ import { AddCompanyComponent } from './components/add-company/add-company.compon
 import { EditCompanyComponent } from './components/edit-company/edit-company.component';
 import { AddJobOfferComponent } from './components/add-job-offer/add-job-offer.component';
 import { ManageJobOffersComponent } from './components/manage-job-offers/manage-job-offers.component';
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ManageJobOffersComponent } from './components/manage-job-offers/manage-
       HttpClientModule,
       AlertsModule,
       ReactiveFormsModule,
+      NgMultiSelectDropDownModule.forRoot(),
       NgbModule,
       BrowserAnimationsModule,
       ToastrModule.forRoot({

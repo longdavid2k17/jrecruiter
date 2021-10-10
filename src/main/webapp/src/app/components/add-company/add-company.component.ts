@@ -35,9 +35,9 @@ export class AddCompanyComponent implements OnInit
       company: ['', Validators.required]
     });
     this.savetoNewOneForm = this.formBuilder.group({
-      companyName: ['', Validators.required],
+      company: ['', Validators.required],
       localization: ['', Validators.required],
-      description: ['', Validators.required]
+      positionDescription: ['', Validators.required]
     });
     this.companyService.getAllCompanies().subscribe(data => {
       this.companies = data;

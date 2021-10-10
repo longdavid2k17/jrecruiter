@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {JobOffer} from "../models/job-offer";
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpRequest} from "@angular/common/http";
+import {TokenStorageService} from "./token-storage.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class JobOfferService
   private homeSelector:boolean = false;
   private baseUrl='http://localhost:8080/api/offers';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private token: TokenStorageService) { }
 
   getOffersHomeComponent():Observable<JobOffer[]>
   {
@@ -28,6 +29,12 @@ export class JobOfferService
   {
     const offerUrl = `${this.baseUrl}/id/${offerId}`;
     return this.http.get<JobOffer>(offerUrl);
+  }
+
+  getContractTypes() :Observable<string[]>
+  {
+    const contractsUrl = `${this.baseUrl}/contract-types`;
+    return this.http.get<string[]>(contractsUrl);
   }
 
   private getOffers(searchUrl: string): Observable<JobOffer[]>
@@ -48,6 +55,19 @@ export class JobOfferService
     const searchUrl = `${this.baseUrl}/all/pageable?page=${thePage}&size=${thePageSize}`;
 
     return this.http.get<GetResponseJobOffer>(searchUrl);
+  }
+
+  save(value: JobOffer)
+  {
+    let tokenInBrowser = this.token.getToken();
+    const newRequest = new HttpRequest('POST', `${this.baseUrl}/save`, value,
+      {
+        responseType: "text", reportProgress: true, headers: new HttpHeaders(
+          { "Authorization": "Bearer "+tokenInBrowser },
+        )
+      });
+
+    return this.http.request(newRequest);
   }
 }
 

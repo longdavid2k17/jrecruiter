@@ -1,1 +1,73 @@
-<p>add-job-offer works!</p>
+<div class="container">
+    <div class="card shadow-lg border-0 py-2 bg-body rounded" style="padding: 20px;margin-bottom: 10%; margin-top: 10%; text-align: center">
+      <h3>Utwórz ofertę pracy</h3><br/>
+      <form [formGroup]="jobOfferForm" style="text-align: center" (ngSubmit)="onSubmit()"#f="ngForm" novalidate>
+        <div class="form-group" style="text-align: center">
+          <div class="form-row">
+            <div class="form-group col-7">
+              <label><b>Oferta pracy zostanie powiązana z firmą: </b></label>
+              <select class="custom-select" (change)="changeCompany($event)" formControlName="company" required  [ngClass]="{ 'is-invalid': submitted  }">
+                <option *ngIf="userCompany" selected="selected" [ngValue]="userCompany">{{userCompany.companyName}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-7">
+              <label><b>Nazwa stanowiska</b></label>
+              <input type="text" formControlName="positionTitle" class="form-control" required placeholder="Nazwa" [ngClass]="{ 'is-invalid': submitted  }" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-7">
+              <label><b>Opis</b></label>
+              <textarea placeholder="Opis stanowiska" formControlName="positionDescription" class="form-control" [ngClass]="{ 'is-invalid': submitted  }"></textarea>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-7">
+              <label><b>Zarobki od</b></label>
+              <input type="number" formControlName="lowEndPaymentRange" class="form-control" placeholder="Dolne widełki" [ngClass]="{ 'is-invalid': submitted}" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-7">
+              <label><b>Zarobki do</b></label>
+              <input type="number" formControlName="highEndPaymentRange" class="form-control" placeholder="Górne widełki" [ngClass]="{ 'is-invalid': submitted}" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-7">
+              <label><b>Rodzaj umowy</b></label>
+              <select class="custom-select" (change)="changeContractType($event)" formControlName="contractType">
+                <option value="" disabled>Wybierz</option>
+                <option *ngFor="let contractType of contractTypes" [ngValue]="contractType">{{contractType}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-7">
+              <label><b>Wymagania</b></label>
+              <select class="custom-select" (change)="onItemSelect($event)" formControlName="requirements" multiple>
+                <option value="" disabled>Wybierz</option>
+                <option *ngFor="let requirement of dropdownList" [ngValue]="requirement">{{requirement.name}} - {{requirement.scaleIndicator}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" style="text-align: center">
+          <div style="width: 50%; text-align: center; margin-left: 25%">
+            <button type="submit" class="btn btn-info btn-lg btn-block">Utwórz ofertę</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && isSaveFailed">
+            Zapis nie powiodł się: {{ errorMessage }}
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
