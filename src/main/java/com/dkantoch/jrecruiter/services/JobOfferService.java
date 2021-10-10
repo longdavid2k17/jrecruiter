@@ -173,4 +173,35 @@ public class JobOfferService
 
         return ResponseEntity.ok().body(finalList);
     }
+
+    public ResponseEntity<?> getAllCompanyOffers(Long id)
+    {
+        try
+        {
+            List<JobOffer> jobOffers = jobOfferRepository.findAllByCompany_IdEquals(id);
+            if(jobOffers.size()>0)
+            {
+                return ResponseEntity.ok().body(jobOffers);
+            }
+            else
+                return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Brak pozycji!"));
+        }
+        catch (Exception e)
+        {
+            logger.error(e.getMessage());
+            return ResponseEntity.badRequest().body(ToJsonString.toJsonString("Błąd! "+e.getMessage()));
+        }
+    }
+
+    public ResponseEntity<?> delete(Long id)
+    {
+        Optional<JobOffer> optionalJobOffer = jobOfferRepository.findById(id);
+        if(optionalJobOffer.isPresent())
+        {
+            jobOfferRepository.delete(optionalJobOffer.get());
+            return ResponseEntity.ok().body(ToJsonString.toJsonString("Usunięto ofertę '"+optionalJobOffer.get().getPositionTitle()+"'"));
+        }
+        else
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ToJsonString.toJsonString("Nie znaleziono oferty o ID "+id));
+    }
 }

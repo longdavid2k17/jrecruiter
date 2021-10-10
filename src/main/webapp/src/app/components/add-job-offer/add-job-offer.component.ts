@@ -42,7 +42,7 @@ export class AddJobOfferComponent implements OnInit {
               private toastr: ToastrService,
               private companyService:CompanyService,
               private jobOfferService:JobOfferService,
-              private requiremetnsService:RequirementsService,
+              private requirementsService:RequirementsService,
               private recruiterService:RecruiterService,
               private userService:UserService) { }
 
@@ -59,7 +59,7 @@ export class AddJobOfferComponent implements OnInit {
     this.companyService.getAllCompanies().subscribe(data => {
       this.companies = data;
     })
-    this.requiremetnsService.getAllRequirements().subscribe(data => {
+    this.requirementsService.getAllRequirements().subscribe(data => {
       this.dropdownList = data;
     })
     this.jobOfferService.getContractTypes().subscribe(data => {

@@ -1,6 +1,7 @@
 package com.dkantoch.jrecruiter.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -49,7 +50,7 @@ public class JobOffer implements Comparable<JobOffer>
     @JoinColumn(name = "company_id",nullable = false)
     private Company company;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "jobOffer")
     private Set<RecruitmentProcess> recruitmentProcesses;
 

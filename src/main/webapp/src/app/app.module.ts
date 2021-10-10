@@ -22,7 +22,15 @@ import { EditCompanyComponent } from './components/edit-company/edit-company.com
 import { AddJobOfferComponent } from './components/add-job-offer/add-job-offer.component';
 import { ManageJobOffersComponent } from './components/manage-job-offers/manage-job-offers.component';
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
-
+import {MatTableModule} from "@angular/material/table";
+import {CdkTableModule} from "@angular/cdk/table";
+import {MatSelectModule} from "@angular/material/select";
+import {MatInputModule} from "@angular/material/input";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
+import {MatButtonModule} from "@angular/material/button";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,27 +44,36 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
     AddCompanyComponent,
     EditCompanyComponent,
     AddJobOfferComponent,
-    ManageJobOffersComponent
+    ManageJobOffersComponent,
+    ConfirmationDialogComponent,
   ],
-    imports: [
-      BrowserModule,
-      AppRoutingModule,
-      FormsModule,
-      HttpClientModule,
-      AlertsModule,
-      ReactiveFormsModule,
-      NgMultiSelectDropDownModule.forRoot(),
-      NgbModule,
-      BrowserAnimationsModule,
-      ToastrModule.forRoot({
-        timeOut:5000,
-        progressBar:true,
-        progressAnimation:'increasing',
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    AlertsModule,
+    ReactiveFormsModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    NgbModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+        timeOut: 5000,
+        progressBar: true,
+        progressAnimation: 'increasing',
         preventDuplicates: true,
         positionClass: 'toast-top-right'
-        }
-      )
-    ],
+      }
+    ),
+    MatTableModule,
+    CdkTableModule,
+    MatSelectModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatButtonModule,
+    FontAwesomeModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,6 @@
+table {
+  width: 100%;
+}
 .toast-center-center {
   top: 50%;
   left: 50%;
@@ -341,3 +344,6 @@ input.au-input.au-input-xl{
     content:'Google+';
   }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

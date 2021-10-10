@@ -36,6 +36,13 @@ public class JobOfferController
 
     }
 
+    @GetMapping("/company/{id}")
+    public ResponseEntity<?> getAllOfCompany(@PathVariable Long id)
+    {
+        ResponseEntity<?> response = jobOfferService.getAllCompanyOffers(id);
+        return response;
+    }
+
     @GetMapping("/all")
     public ResponseEntity<?> getAllOffers()
     {
@@ -68,6 +75,13 @@ public class JobOfferController
     public ResponseEntity<?> getContractTypes()
     {
         ResponseEntity<?> response = jobOfferService.getContractTypes();
+        return response;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id)
+    {
+        ResponseEntity<?> response = jobOfferService.delete(id);
         return response;
     }
 }

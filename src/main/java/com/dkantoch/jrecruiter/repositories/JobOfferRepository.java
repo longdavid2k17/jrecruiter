@@ -14,4 +14,6 @@ public interface JobOfferRepository extends JpaRepository<JobOffer,Long>
 {
     JobOffer getById(Long id);
     Page<JobOffer> findAll(Pageable pageable);
+
+    List<JobOffer> findAllByCompany_IdEquals(Long id);
 }

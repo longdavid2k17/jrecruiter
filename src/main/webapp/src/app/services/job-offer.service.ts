@@ -48,6 +48,11 @@ export class JobOfferService
 
   }
 
+  getCompanyOffers(id:number):Observable<JobOffer[]>
+  {
+    return this.http.get<JobOffer[]>(`${this.baseUrl}/company/${id}`);
+  }
+
   getJobOffersPaginate(thePage: number,
                        thePageSize: number): Observable<GetResponseJobOffer> {
 
@@ -68,6 +73,11 @@ export class JobOfferService
       });
 
     return this.http.request(newRequest);
+  }
+
+  delete(id: number):Observable<any>
+  {
+    return this.http.delete<any>(`${this.baseUrl}/delete/${id}`);
   }
 }
 

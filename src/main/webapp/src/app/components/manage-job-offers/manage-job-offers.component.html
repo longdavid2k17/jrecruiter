@@ -1,1 +1,48 @@
-<p>manage-job-offers works!</p>
+<div class="mat-elevation-z8" style="margin-bottom: 50px; margin-top: 50px">
+  <table mat-table [dataSource]="jobOffers" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Data utworzenia </th>
+      <td mat-cell *matCellDef="let row"> {{row.creationDate | date}} </td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="positionTitle">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nazwa stanowiska </th>
+      <td mat-cell *matCellDef="let row"> {{row.positionTitle}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="contractType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Rodzaj umowy </th>
+      <td mat-cell *matCellDef="let row"> {{row.contractType}} </td>
+    </ng-container>
+
+    <!-- Fruit Column -->
+    <ng-container matColumnDef="positionApplications">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ilość aplikacji </th>
+      <td mat-cell *matCellDef="let row"> {{row.recruitmentProcesses.length}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="manage">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Statystyki </th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-button title="Kliknij aby przejść do statystyk" style="margin-right: 5px"><fa-icon [icon]="manageIcon"></fa-icon></button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell  *matHeaderCellDef > Zarządzaj</th>
+      <td mat-cell *matCellDef="let row" >
+        <button mat-button title="Edytuj" style="margin-right: 5px" (click)="edit(row.id)"><fa-icon [icon]="editIcon"></fa-icon></button>
+        <button mat-button title="Usuń" (click)="delete(row.id)"><fa-icon [icon]="deleteIcon"></fa-icon></button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
